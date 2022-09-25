@@ -10,13 +10,7 @@ import Foundation
 class MainViewPresenter{
     
     // MARK: Properties
-    var locationName: String?
-    //var descriprionWeather: String?
-    var temperature: Double?
-    var temperatureFeelsLike: Double?
-    var temperatureMax: Double?
-    var temperatureMin: Double?
-    var humidity: Int?
+    var weather: WeatherStruct?
     
     unowned var view: MainView
     var model: Model
@@ -31,17 +25,19 @@ class MainViewPresenter{
         if(text == nil) { return }
         let queue = DispatchQueue(label: "networkRequest")
         queue.async { [self] in
-            let result = model.fetchDataForCity(city: text!)
-            locationName = result.city
-            temperature = result.temp
-            humidity = result.humid
-            if(humidity == nil || temperature == nil || locationName == nil){
-                debugPrint("temp or humid is nil!")
-                // Alert Controller
+            weather = model.fetchDataForCity(city: text!)
+            if(weather == nil){
+                debugPrint("weather is nil!")
+                // Alert Controller need
                 return
             }
-            view.printInfo(city: locationName!, temperature: temperature!, humidity: humidity!)
+            DispatchQueue.main.async { [self] in
+                view.humidityLabel.text = String((weather?.main.humidity)!)
+                view.temperatureLabel.text = String((weather?.main.temp)!)
+                view.cityLabel.text = weather?.name
+            }
         }
+    
     }
     
     

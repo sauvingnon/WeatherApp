@@ -32,14 +32,6 @@ class MainView: UIViewController {
         searchBar.placeholder = "Введите город"
     }
     
-    func printInfo(city: String, temperature: Double, humidity: Int){
-        let main = DispatchQueue.main
-        main.async { [self] in
-            cityLabel.text = city
-            temperatureLabel.text = String(temperature)
-            humidityLabel.text = String(humidity)
-        }
-    }
 }
 
 extension MainView: UISearchBarDelegate{
