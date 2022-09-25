@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21225" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Main View-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="MainView" customModule="WeatherApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="aAG-n0-S87">
+                                <rect key="frame" x="0.0" y="59" width="393" height="56"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="xWC-qW-fNL"/>
+                                </connections>
+                            </searchBar>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="City" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0ZS-ag-NCN">
+                                <rect key="frame" x="179.33333333333334" y="414.66666666666669" width="34.666666666666657" height="23"/>
+                                <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Temperature" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Zl-0n-kTc">
+                                <rect key="frame" x="140.33333333333334" y="445.66666666666669" width="112.33333333333334" height="23"/>
+                                <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Humidity" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cKQ-i0-AbM">
+                                <rect key="frame" x="157.66666666666666" y="476.66666666666669" width="78" height="23"/>
+                                <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="7Zl-0n-kTc" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="CK1-dP-9cs"/>
+                            <constraint firstItem="7Zl-0n-kTc" firstAttribute="top" secondItem="0ZS-ag-NCN" secondAttribute="bottom" constant="8" id="OfQ-cs-CQe"/>
+                            <constraint firstItem="0ZS-ag-NCN" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="Qag-71-MbC"/>
+                            <constraint firstItem="aAG-n0-S87" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="Qi8-am-Qho"/>
+                            <constraint firstItem="0ZS-ag-NCN" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="UcL-e1-I3R"/>
+                            <constraint firstItem="cKQ-i0-AbM" firstAttribute="top" secondItem="7Zl-0n-kTc" secondAttribute="bottom" constant="8" id="kRE-Yl-Uek"/>
+                            <constraint firstAttribute="trailing" secondItem="aAG-n0-S87" secondAttribute="trailing" id="mWf-Xg-nvp"/>
+                            <constraint firstItem="cKQ-i0-AbM" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="sNy-WG-WYo"/>
+                            <constraint firstItem="aAG-n0-S87" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="vLT-ro-ao7"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="cityLabel" destination="0ZS-ag-NCN" id="W30-xx-l8D"/>
+                        <outlet property="humidityLabel" destination="cKQ-i0-AbM" id="aQ5-66-CA6"/>
+                        <outlet property="searchBar" destination="aAG-n0-S87" id="9RY-wB-8t7"/>
+                        <outlet property="temperatureLabel" destination="7Zl-0n-kTc" id="yBd-DB-5j4"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="64.615384615384613" y="-34.123222748815166"/>
+        </scene>
+    </scenes>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
