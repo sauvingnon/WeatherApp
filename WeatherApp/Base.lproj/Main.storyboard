@@ -23,20 +23,29 @@
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="xWC-qW-fNL"/>
                                 </connections>
                             </searchBar>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="City" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0ZS-ag-NCN">
-                                <rect key="frame" x="179.33333333333334" y="414.66666666666669" width="34.666666666666657" height="23"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Город" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0ZS-ag-NCN">
+                                <rect key="frame" x="168.66666666666666" y="414.66666666666669" width="56" height="23"/>
                                 <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="20"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Temperature" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Zl-0n-kTc">
-                                <rect key="frame" x="140.33333333333334" y="445.66666666666669" width="112.33333333333334" height="23"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Температура" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Zl-0n-kTc">
+                                <rect key="frame" x="134.66666666666666" y="445.66666666666669" width="123.66666666666666" height="23"/>
                                 <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="20"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Humidity" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cKQ-i0-AbM">
-                                <rect key="frame" x="157.66666666666666" y="476.66666666666669" width="78" height="23"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Влажность" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cKQ-i0-AbM">
+                                <rect key="frame" x="144.66666666666666" y="476.66666666666669" width="104" height="23"/>
+                                <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="zqZ-fQ-qvV">
+                                <rect key="frame" x="178" y="135" width="37" height="37"/>
+                            </activityIndicatorView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Описание" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sia-iF-ZS8">
+                                <rect key="frame" x="149.66666666666666" y="507.66666666666674" width="93.666666666666657" height="23"/>
                                 <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="20"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -45,11 +54,15 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="zqZ-fQ-qvV" firstAttribute="top" secondItem="aAG-n0-S87" secondAttribute="bottom" constant="20" id="2EI-dq-tiR"/>
+                            <constraint firstItem="sia-iF-ZS8" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Ati-Vm-7o7"/>
                             <constraint firstItem="7Zl-0n-kTc" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="CK1-dP-9cs"/>
+                            <constraint firstItem="sia-iF-ZS8" firstAttribute="top" secondItem="cKQ-i0-AbM" secondAttribute="bottom" constant="8" id="Luc-EC-RgZ"/>
                             <constraint firstItem="7Zl-0n-kTc" firstAttribute="top" secondItem="0ZS-ag-NCN" secondAttribute="bottom" constant="8" id="OfQ-cs-CQe"/>
                             <constraint firstItem="0ZS-ag-NCN" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="Qag-71-MbC"/>
                             <constraint firstItem="aAG-n0-S87" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="Qi8-am-Qho"/>
                             <constraint firstItem="0ZS-ag-NCN" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="UcL-e1-I3R"/>
+                            <constraint firstItem="zqZ-fQ-qvV" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="aSb-Vq-ey8"/>
                             <constraint firstItem="cKQ-i0-AbM" firstAttribute="top" secondItem="7Zl-0n-kTc" secondAttribute="bottom" constant="8" id="kRE-Yl-Uek"/>
                             <constraint firstAttribute="trailing" secondItem="aAG-n0-S87" secondAttribute="trailing" id="mWf-Xg-nvp"/>
                             <constraint firstItem="cKQ-i0-AbM" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="sNy-WG-WYo"/>
@@ -57,7 +70,9 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="activityIndicator" destination="zqZ-fQ-qvV" id="yvG-2A-5cW"/>
                         <outlet property="cityLabel" destination="0ZS-ag-NCN" id="W30-xx-l8D"/>
+                        <outlet property="descriptionLabel" destination="sia-iF-ZS8" id="jBH-9B-aKh"/>
                         <outlet property="humidityLabel" destination="cKQ-i0-AbM" id="aQ5-66-CA6"/>
                         <outlet property="searchBar" destination="aAG-n0-S87" id="9RY-wB-8t7"/>
                         <outlet property="temperatureLabel" destination="7Zl-0n-kTc" id="yBd-DB-5j4"/>

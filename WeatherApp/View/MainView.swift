@@ -16,6 +16,8 @@ class MainView: UIViewController {
     @IBOutlet weak var cityLabel: UILabel!
     @IBOutlet weak var temperatureLabel: UILabel!
     @IBOutlet weak var humidityLabel: UILabel!
+    @IBOutlet weak var descriptionLabel: UILabel!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var searchBar: UISearchBar!
     
     // MARK: Lifecycle
@@ -23,7 +25,12 @@ class MainView: UIViewController {
         super.viewDidLoad()
         presenter = MainViewPresenter(view: self)
         searchBarOptions()
+        
         // Do any additional setup after loading the view.
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        view.endEditing(true)
     }
     
     // MARK: Methods
@@ -37,7 +44,8 @@ class MainView: UIViewController {
 extension MainView: UISearchBarDelegate{
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        presenter.searchBarInput(text: searchBar.text)
+        presenter.searchBarInput(input: searchBar.text)
+        view.endEditing(true)
     }
     
 }

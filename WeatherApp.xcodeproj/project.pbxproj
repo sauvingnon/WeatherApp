@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		F321185A28DDBC7A00FC4933 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = F321185928DDBC7A00FC4933 /* Model.swift */; };
+		F3279E1B28E1E2BF0028CD40 /* Extension+String.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3279E1A28E1E2BF0028CD40 /* Extension+String.swift */; };
 		F3B365FA28DB84620098FAF9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B365F928DB84620098FAF9 /* AppDelegate.swift */; };
 		F3B365FC28DB84620098FAF9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B365FB28DB84620098FAF9 /* SceneDelegate.swift */; };
 		F3B365FE28DB84620098FAF9 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B365FD28DB84620098FAF9 /* MainView.swift */; };
@@ -19,6 +20,7 @@
 
 /* Begin PBXFileReference section */
 		F321185928DDBC7A00FC4933 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		F3279E1A28E1E2BF0028CD40 /* Extension+String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+String.swift"; sourceTree = "<group>"; };
 		F3B365F628DB84620098FAF9 /* WeatherApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WeatherApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F3B365F928DB84620098FAF9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F3B365FB28DB84620098FAF9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -84,6 +86,7 @@
 		F3B365F828DB84620098FAF9 /* WeatherApp */ = {
 			isa = PBXGroup;
 			children = (
+				F3279E1A28E1E2BF0028CD40 /* Extension+String.swift */,
 				F321185828DDBC5D00FC4933 /* Model */,
 				F321185728DDBC5500FC4933 /* Presenter */,
 				F321185628DDBC4E00FC4933 /* View */,
@@ -170,6 +173,7 @@
 			files = (
 				F321185A28DDBC7A00FC4933 /* Model.swift in Sources */,
 				F3B365FE28DB84620098FAF9 /* MainView.swift in Sources */,
+				F3279E1B28E1E2BF0028CD40 /* Extension+String.swift in Sources */,
 				F3B365FA28DB84620098FAF9 /* AppDelegate.swift in Sources */,
 				F3B3660E28DB87C70098FAF9 /* MainViewPresenter.swift in Sources */,
 				F3B365FC28DB84620098FAF9 /* SceneDelegate.swift in Sources */,
