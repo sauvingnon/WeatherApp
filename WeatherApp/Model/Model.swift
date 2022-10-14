@@ -14,31 +14,30 @@ class Model{
     let apiKey = "465faf28897510725695caa4ac25f93f"
     let lang = "&lang=ru"
     let units = "&units=metric"
-    let lock = NSLock()
+    let presenter: MainViewPresenter!
     
-    func fetchDataForCity(city: String) -> (WeatherStruct?){
-        var counter = 0
+    init(presenter: MainViewPresenter!) {
+        self.presenter = presenter
+    }
+    
+    func fetchDataForCity(city: String){
         var weather: WeatherStruct?
         let finalUrlString = "https://api.openweathermap.org/data/2.5/weather?q=\(city)&appid=\(apiKey)\(units)\(lang)"
         let url = URL(string: finalUrlString.encodeUrl)
         
         let task = URLSession.shared.dataTask(with: url!) { data, response, error in
             do{
-                if(data == nil) { return }
-                let decoder = JSONDecoder()
-                weather = try decoder.decode(WeatherStruct.self, from: data!)
+                if(data != nil){
+                    let decoder = JSONDecoder()
+                    weather = try decoder.decode(WeatherStruct.self, from: data!)
+                }
             }
             catch {
                 debugPrint(error)
             }
+            self.presenter.handleWeatherResponse(weather: weather)
         }
         task.resume()
-        while(weather == nil){
-            if( counter > 5) { break }
-            counter += 1
-            Thread.sleep(forTimeInterval: 1)
-        }
-        return (weather)
     }
 }
 

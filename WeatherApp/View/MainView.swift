@@ -22,6 +22,7 @@ class MainView: UIViewController {
     @IBOutlet weak var windSpeedLabel: UILabel!
     @IBOutlet weak var backgroundImage: UIImageView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var maxMinLabel: UILabel!
     @IBOutlet weak var searchBar: UISearchBar!
     
     // MARK: Actions
@@ -34,6 +35,7 @@ class MainView: UIViewController {
         super.viewDidLoad()
         searchBar.delegate = self
         presenter = MainViewPresenter(view: self)
+        presenter.model = Model(presenter: presenter)
         
         // Do any additional setup after loading the view.
     }

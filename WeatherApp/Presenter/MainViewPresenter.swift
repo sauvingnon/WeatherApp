@@ -12,8 +12,7 @@ import AudioToolbox
 class MainViewPresenter{
     
     // MARK: Properties
-    var weather: WeatherStruct?
-    var selectedCity: String? {
+    private var selectedCity: String? {
         set{
             UserDefaults.standard.set(newValue, forKey: "SelectedCity")
             UserDefaults.standard.synchronize()
@@ -28,19 +27,19 @@ class MainViewPresenter{
             }
         }
     }
+    
     unowned var view: MainView
-    var model: Model
+    var model: Model!
     var weatherIsBeasy: Bool
     
     // MARK: - Initializers
     init(view: MainView) {
         self.view = view
-        model = Model()
         weatherIsBeasy = false
         syncronizeSelectedCity()
     }
     
-    func syncronizeSelectedCity(){
+    private func syncronizeSelectedCity(){
         if(selectedCity != nil){
             showWeatherForCity(input: selectedCity)
         }
@@ -60,27 +59,32 @@ class MainViewPresenter{
         }
         let queue = DispatchQueue(label: "networkRequest")
         queue.async { [self] in
-            weather = model.fetchDataForCity(city: text!)
-            DispatchQueue.main.async { [self] in
-                if(weather == nil){
-                    debugPrint("weather is nil!")
-                    view.activityIndicator.stopAnimating()
-                    view.searchBar.text = ""
-                    view.showAlert(title: "Ошибка!", message: "Что-то пошло не так..")
-                }else{
-                    view.humidityLabel.text = String(weather?.main.humidity ?? 0) + " %"
-                    view.temperatureLabel.text = String(weather?.main.temp ?? 0) + " C°"
-                    view.pressureLabel.text = String(weather?.main.pressure ?? 0) + " hPa"
-                    view.windSpeedLabel.text = String(weather?.wind.speed ?? 0) + " mps"
-                    view.cityLabel.text = weather?.name
-                    view.descriptionLabel.text = weather?.weather.first?.description
-                    view.activityIndicator.stopAnimating()
-                }
-            }
-            weatherIsBeasy = false
+            model.fetchDataForCity(city: text!)
         }
     
     }
+    
+    func handleWeatherResponse(weather: WeatherStruct?){
+        DispatchQueue.main.async { [self] in
+            if(weather == nil){
+                debugPrint("weather is nil!")
+                view.searchBar.text = ""
+                view.showAlert(title: "Ошибка!", message: "Что-то пошло не так..")
+            }else{
+                view.humidityLabel.text = String(weather?.main.humidity ?? 0) + " %"
+                view.temperatureLabel.text = String(weather?.main.temp ?? 0) + " C°"
+                view.pressureLabel.text = String(weather?.main.pressure ?? 0) + " hPa"
+                view.windSpeedLabel.text = String(weather?.wind.speed ?? 0) + " mps"
+                view.cityLabel.text = weather?.name
+                view.descriptionLabel.text = weather?.weather.first?.description
+                view.maxMinLabel.text = "макс: \(String(weather?.main.temp_max ?? 0)), " + "мин: \(String(weather?.main.temp_min ?? 0))"
+            }
+            weatherIsBeasy = false
+            view.activityIndicator.stopAnimating()
+        }
+    }
+    
+    
     
     func selectedButtonTapped(){
         UINotificationFeedbackGenerator().notificationOccurred(.success) // вибрация
@@ -91,7 +95,7 @@ class MainViewPresenter{
         }
     }
     
-    func changeStateSelectedButton(state: State){
+    private func changeStateSelectedButton(state: State){
         if(state == .fill){
             view.selectedButton.setImage(UIImage(systemName: "star.fill"), for: .normal)
         }
@@ -102,7 +106,7 @@ class MainViewPresenter{
     
 }
 
-enum State{
+private enum State{
     case fill
     case empty
 }

@@ -86,7 +86,6 @@
 		F3B365F828DB84620098FAF9 /* WeatherApp */ = {
 			isa = PBXGroup;
 			children = (
-				F3F87B0728E3668A003479E2 /* Source */,
 				F3279E1A28E1E2BF0028CD40 /* Extension+String.swift */,
 				F321185828DDBC5D00FC4933 /* Model */,
 				F321185728DDBC5500FC4933 /* Presenter */,
@@ -99,13 +98,6 @@
 				F3B3660728DB84640098FAF9 /* Info.plist */,
 			);
 			path = WeatherApp;
-			sourceTree = "<group>";
-		};
-		F3F87B0728E3668A003479E2 /* Source */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Source;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
