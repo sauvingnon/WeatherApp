@@ -25,6 +25,7 @@ class MainView: UIViewController {
     @IBOutlet weak var maxMinLabel: UILabel!
     @IBOutlet weak var searchBar: UISearchBar!
     
+    
     // MARK: Actions
     @IBAction func selectedButtonTapped(_ sender: Any) {
         presenter.selectedButtonTapped()
