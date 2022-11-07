@@ -14,7 +14,7 @@ class WeatherModel{
     let lang = "&lang=ru"
     let units = "&units=metric"
     
-    var presenter: WeatherViewPresenter!
+    weak var presenter: WeatherViewPresenter!
     
     init(presenter: WeatherViewPresenter){
         self.presenter = presenter
@@ -156,6 +156,10 @@ struct CurrentWeatherStruct: Codable {
         let speed: Double
         let deg: Int
         let gust: Double?
+    }
+    let clouds: Clouds
+    struct Clouds: Codable{
+        let all: Int
     }
     let name: String
 }

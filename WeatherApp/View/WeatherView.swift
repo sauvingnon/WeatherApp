@@ -13,13 +13,16 @@ class WeatherView: UIViewController {
     var presenter: WeatherViewPresenter!
     
     // MARK: - Outlets
+    @IBOutlet weak var cloudyLabel: UILabel!
     @IBOutlet weak var cityLabel: UILabel!
     @IBOutlet weak var temperatureLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var maxMinTemperatureLabel: UILabel!
+    @IBOutlet weak var windSpeedLabel: UILabel!
     @IBOutlet weak var hourlyCollectionView: UICollectionView!
     @IBOutlet weak var humidityLabel: UILabel!
     @IBOutlet weak var pressureLabel: UILabel!
+    @IBOutlet weak var visabilityLabel: UILabel!
     @IBOutlet weak var dailyCollectionView: UICollectionView!
     
     // MARK: - LifeCycle
@@ -34,8 +37,21 @@ class WeatherView: UIViewController {
         dailyCollectionView.delegate = self
         dailyCollectionView.dataSource = self
         
+        let leftGesture = UISwipeGestureRecognizer(target: self, action: #selector(WeatherView.actionLeftSwipeGesture(_:)))
+        leftGesture.direction = .left
+        self.view.addGestureRecognizer(leftGesture)
+        
         presenter.getAllDataForCity(input: "Ижевск")
         // Стартовый запрос
+    }
+    
+    @objc func actionLeftSwipeGesture(_ sender: UISwipeGestureRecognizer) {
+        if let newViewController = storyboard?.instantiateViewController(withIdentifier: "CityViewId") as? CitiesView {
+            newViewController.weatherView = self
+            newViewController.modalTransitionStyle = .flipHorizontal // это значение можно менять для разных видов анимации появления
+            newViewController.modalPresentationStyle = .overCurrentContext // это та самая волшебная строка, убрав или закомментировав ее, вы получите появление смахиваемого контроллера
+            present(newViewController, animated: true, completion: nil)
+           }
     }
     
     func showAlert(title: String, message: String){

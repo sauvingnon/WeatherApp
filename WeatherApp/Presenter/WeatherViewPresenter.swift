@@ -14,7 +14,7 @@ class WeatherViewPresenter{
     var hourlyWeatherCells = [WeatherHourlyCellStruct]()
     var dailyWeatherCells = [WeatherDailyCellStruct]()
     var requestIsBeasy = false
-    var view: WeatherView
+    weak var view: WeatherView!
     var model: WeatherModel!
     
     init(view: WeatherView){
@@ -55,9 +55,17 @@ class WeatherViewPresenter{
                 debugPrint("weather is nil!")
                 view.showAlert(title: "Ошибка!", message: "Что-то пошло не так..")
             }else{
+                let visability = currentWeather!.visibility / 1000
+                if visability == 10 {
+                    view.visabilityLabel.text = "более \(visability) км"
+                }else{
+                    view.visabilityLabel.text = String(visability)
+                }
+                view.windSpeedLabel.text = "\(currentWeather!.wind.speed) м/с"
                 let pressure = Double(currentWeather!.main.pressure) / 1.333
                 view.pressureLabel.text = "\(Int(pressure)) мм рт. ст."
                 view.humidityLabel.text = "\(currentWeather!.main.humidity) %"
+                view.cloudyLabel.text = "\(currentWeather!.clouds.all) %"
                 view.temperatureLabel.text = "\(currentWeather!.main.temp) C°"
                 view.cityLabel.text = currentWeather!.name
                 view.descriptionLabel.text = currentWeather!.weather.first?.description
