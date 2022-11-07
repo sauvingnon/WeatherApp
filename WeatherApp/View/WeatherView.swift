@@ -18,6 +18,8 @@ class WeatherView: UIViewController {
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var maxMinTemperatureLabel: UILabel!
     @IBOutlet weak var hourlyCollectionView: UICollectionView!
+    @IBOutlet weak var humidityLabel: UILabel!
+    @IBOutlet weak var pressureLabel: UILabel!
     @IBOutlet weak var dailyCollectionView: UICollectionView!
     
     // MARK: - LifeCycle

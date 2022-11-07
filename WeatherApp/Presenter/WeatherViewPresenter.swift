@@ -55,9 +55,12 @@ class WeatherViewPresenter{
                 debugPrint("weather is nil!")
                 view.showAlert(title: "Ошибка!", message: "Что-то пошло не так..")
             }else{
+                let pressure = Double(currentWeather!.main.pressure) / 1.333
+                view.pressureLabel.text = "\(Int(pressure)) мм рт. ст."
+                view.humidityLabel.text = "\(currentWeather!.main.humidity) %"
                 view.temperatureLabel.text = "\(currentWeather!.main.temp) C°"
-                view.cityLabel.text = currentWeather?.name
-                view.descriptionLabel.text = currentWeather?.weather.first?.description
+                view.cityLabel.text = currentWeather!.name
+                view.descriptionLabel.text = currentWeather!.weather.first?.description
                 view.maxMinTemperatureLabel.text = "макс: \(currentWeather!.main.temp_max) C°, " + "мин: \(currentWeather!.main.temp_min) C°"
             }
             requestIsBeasy = false
