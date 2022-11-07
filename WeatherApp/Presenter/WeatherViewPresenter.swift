@@ -68,31 +68,31 @@ class WeatherViewPresenter{
     func UpdateDailyWeather(){
         if(hourlyWeathers == nil) { return }
         dailyWeatherCells.removeAll()
-        var dictHourlyWeathers = [String: WeatherDailyCellStruct]()
-        var oldWeather: WeatherDailyCellStruct
+        var oldWeatherIndex: Int
         for item in (hourlyWeathers?.list)!{
             let dayOfWeek = getDayOfWeek(fullStringDay: item.dt_txt)
-            if dictHourlyWeathers.keys.contains(where: { String in
-                if String == dayOfWeek{
+            if dailyWeatherCells.contains(where: { element in
+                if element.day == dayOfWeek{
                     return true
                 }
                 return false
             })
             {
                 // Если такой день уже есть - обновим максимумы и минимумы
-                oldWeather = dictHourlyWeathers[dayOfWeek]!
-                oldWeather.tempMax = max(oldWeather.tempMax, Int(item.main.temp_max))
-                oldWeather.tempMin = min(oldWeather.tempMin, Int(item.main.temp_min))
-                dictHourlyWeathers.updateValue(oldWeather, forKey: dayOfWeek)
+                oldWeatherIndex = dailyWeatherCells.firstIndex(where: { element in
+                    if element.day == dayOfWeek {
+                        return true
+                    }
+                    return false
+                })!
+                dailyWeatherCells[oldWeatherIndex].tempMax = max(dailyWeatherCells[oldWeatherIndex].tempMax, Int(item.main.temp_max))
+                dailyWeatherCells[oldWeatherIndex].tempMin = min(dailyWeatherCells[oldWeatherIndex].tempMin, Int(item.main.temp_min))
             }
             else{
                 // Такого дня недели не существует - добавим его
-                var newWeather = WeatherDailyCellStruct(tempMax: Int(item.main.temp_max), tempMin: Int(item.main.temp_min), image: item.weather.first!.icon, day: dayOfWeek)
-                dictHourlyWeathers.updateValue(newWeather, forKey: dayOfWeek)
+                let newWeather = WeatherDailyCellStruct(tempMax: Int(item.main.temp_max), tempMin: Int(item.main.temp_min), image: item.weather.first!.icon, day: dayOfWeek)
+                dailyWeatherCells.append(newWeather)
             }
-        }
-        dictHourlyWeathers.forEach { (key: String, value: WeatherDailyCellStruct) in
-            dailyWeatherCells.append(WeatherDailyCellStruct(tempMax: value.tempMax, tempMin: value.tempMin, image: value.image, day: key))
         }
         DispatchQueue.main.async {
             self.view.dailyCollectionView.reloadData()
@@ -111,7 +111,7 @@ class WeatherViewPresenter{
                     "Пятница",
                     "Суббота"
                 ]
-        let onlyDate = fullStringDay.components(separatedBy: " ").first!
+//        let onlyDate = fullStringDay.components(separatedBy: " ").first!
         let formatter  = DateFormatter()
             formatter.dateFormat = "yyyy-MM-dd' 'HH:mm:ss"
         if let todayDate = formatter.date(from: fullStringDay){
