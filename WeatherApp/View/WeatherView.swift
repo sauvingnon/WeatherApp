@@ -18,7 +18,10 @@ class WeatherView: UIViewController {
     @IBOutlet weak var temperatureLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var maxMinTemperatureLabel: UILabel!
+    @IBOutlet weak var sunriseLabel: UILabel!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var windSpeedLabel: UILabel!
+    @IBOutlet weak var sunsetLabel: UILabel!
     @IBOutlet weak var hourlyCollectionView: UICollectionView!
     @IBOutlet weak var humidityLabel: UILabel!
     @IBOutlet weak var pressureLabel: UILabel!
@@ -40,6 +43,10 @@ class WeatherView: UIViewController {
         let leftGesture = UISwipeGestureRecognizer(target: self, action: #selector(WeatherView.actionLeftSwipeGesture(_:)))
         leftGesture.direction = .left
         self.view.addGestureRecognizer(leftGesture)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         
         presenter.getAllDataForCity(input: "Ижевск")
         // Стартовый запрос
@@ -58,7 +65,10 @@ class WeatherView: UIViewController {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let yesAction = UIAlertAction(title: "ок", style: .default)
         alert.addAction(yesAction)
-        self.show(alert, sender: .none)
+        DispatchQueue.main.async {
+            self.present(alert, animated: true, completion: nil)
+            self.activityIndicator.stopAnimating()
+        }
     }
     
 }

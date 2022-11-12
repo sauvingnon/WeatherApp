@@ -10,6 +10,7 @@
 		F310012F291985FF00C37E7C /* CitiesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F310012E291985FF00C37E7C /* CitiesView.swift */; };
 		F31001312919861B00C37E7C /* CitiesViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F31001302919861B00C37E7C /* CitiesViewPresenter.swift */; };
 		F31001332919976D00C37E7C /* CityCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F31001322919976D00C37E7C /* CityCell.swift */; };
+		F3134AD5291E5C6A00067929 /* CheckInternetConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3134AD4291E5C6A00067929 /* CheckInternetConnection.swift */; };
 		F3279E1B28E1E2BF0028CD40 /* Extension+String.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3279E1A28E1E2BF0028CD40 /* Extension+String.swift */; };
 		F3814304291147D5005A1445 /* WeatherDailyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3814303291147D5005A1445 /* WeatherDailyCell.swift */; };
 		F38811CC2905D32400DC5CC6 /* WeatherHourlyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F38811CB2905D32400DC5CC6 /* WeatherHourlyCell.swift */; };
@@ -27,6 +28,7 @@
 		F310012E291985FF00C37E7C /* CitiesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CitiesView.swift; sourceTree = "<group>"; };
 		F31001302919861B00C37E7C /* CitiesViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CitiesViewPresenter.swift; sourceTree = "<group>"; };
 		F31001322919976D00C37E7C /* CityCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityCell.swift; sourceTree = "<group>"; };
+		F3134AD4291E5C6A00067929 /* CheckInternetConnection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckInternetConnection.swift; sourceTree = "<group>"; };
 		F3279E1A28E1E2BF0028CD40 /* Extension+String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+String.swift"; sourceTree = "<group>"; };
 		F3814303291147D5005A1445 /* WeatherDailyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherDailyCell.swift; sourceTree = "<group>"; };
 		F38811CB2905D32400DC5CC6 /* WeatherHourlyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherHourlyCell.swift; sourceTree = "<group>"; };
@@ -110,6 +112,7 @@
 			isa = PBXGroup;
 			children = (
 				F3279E1A28E1E2BF0028CD40 /* Extension+String.swift */,
+				F3134AD4291E5C6A00067929 /* CheckInternetConnection.swift */,
 				F321185828DDBC5D00FC4933 /* Model */,
 				F321185728DDBC5500FC4933 /* Presenter */,
 				F321185628DDBC4E00FC4933 /* View */,
@@ -197,6 +200,7 @@
 				F38989FD2905CE0D00FFDF0B /* WeatherViewPresenter.swift in Sources */,
 				F38811CC2905D32400DC5CC6 /* WeatherHourlyCell.swift in Sources */,
 				F31001312919861B00C37E7C /* CitiesViewPresenter.swift in Sources */,
+				F3134AD5291E5C6A00067929 /* CheckInternetConnection.swift in Sources */,
 				F31001332919976D00C37E7C /* CityCell.swift in Sources */,
 				F38811D02905D5A600DC5CC6 /* WeatherModel.swift in Sources */,
 				F3279E1B28E1E2BF0028CD40 /* Extension+String.swift in Sources */,

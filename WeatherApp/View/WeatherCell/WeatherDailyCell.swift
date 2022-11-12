@@ -13,7 +13,7 @@ class WeatherDailyCell: UICollectionViewCell {
     @IBOutlet weak var tempLabel: UILabel!
     
     func setupCell(maxTemp: Int, minTemp: Int, imageName: String, date: String){
-        tempLabel.text = "max \(maxTemp) C° min \(minTemp) C°"
+        tempLabel.text = "макс \(maxTemp)° мин \(minTemp)°"
         dateLabel.text = date
     }
 }

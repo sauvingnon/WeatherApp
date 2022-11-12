@@ -76,14 +76,13 @@ extension CitiesView: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        debugPrint("You tapped cell number \(indexPath.row).")
+        debugPrint("Была нажата ячейка \(indexPath.row).")
         
         tableView.deselectRow(at: indexPath, animated: true)
         
         let notesText = presenter.arrayOfCities[indexPath.row]
         
         dismiss(animated: true)
-        
         weatherView.presenter.getAllDataForCity(input: notesText)
         
     }

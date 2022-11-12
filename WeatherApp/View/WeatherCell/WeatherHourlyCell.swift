@@ -16,6 +16,6 @@ class WeatherHourlyCell: UICollectionViewCell {
     func setupCell(time: String, imageName: String, temp: Int){
         timeLabel.text = time
         imageLabel.image = UIImage(named: imageName)
-        temperatureLabel.text = "\(temp) C°"
+        temperatureLabel.text = "\(temp)°"
     }
 }

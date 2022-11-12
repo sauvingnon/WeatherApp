@@ -25,7 +25,12 @@ class WeatherViewPresenter{
         // Метод для запроса всех данных о температуре в городе - почасовой прогноз и текущую погоду
         if(input == nil || requestIsBeasy) { return }
         if(input!.isEmpty) { return }
-        //view.activityIndicator.startAnimating()
+        if CheckInternetConnection.currentReachabilityStatus() == .notReachable {
+            view.showAlert(title: "Ошибка!", message: "Отсутствует подключение к интернету!")
+            debugPrint("Нет подключения к сети интернет!")
+            return
+        }
+        view.activityIndicator.startAnimating()
         requestIsBeasy = true
         let text = input?.trimmingCharacters(in: CharacterSet(charactersIn: " "))
         //view.searchBar.text = text
@@ -33,11 +38,19 @@ class WeatherViewPresenter{
         queue.async {
             self.model.fetchHourlyDataForCity(city: text!)
             self.model.fetchCurrentDataForCity(city: text!)
+            Thread.sleep(forTimeInterval: 5)
+            if self.requestIsBeasy {
+                self.view.showAlert(title: "Ошибка!", message: "Что-то пошло не так..")
+                self.requestIsBeasy = false
+            }
         }
     }
     
     func UpdateHourlyWeather(){
-        if(hourlyWeathers == nil) { return }
+        if(hourlyWeathers == nil) {
+            debugPrint("hourly weather is nil!")
+            return
+        }
         hourlyWeatherCells.removeAll()
         for item in (hourlyWeathers?.list)!{
             let temp = Int(item.main.temp)
@@ -52,27 +65,29 @@ class WeatherViewPresenter{
     func UpdateCurrentWeather(){
         DispatchQueue.main.async { [self] in
             if(currentWeather == nil){
-                debugPrint("weather is nil!")
-                view.showAlert(title: "Ошибка!", message: "Что-то пошло не так..")
+                debugPrint("current weather is nil!")
             }else{
-                let visability = currentWeather!.visibility / 1000
-                if visability == 10 {
-                    view.visabilityLabel.text = "более \(visability) км"
-                }else{
-                    view.visabilityLabel.text = String(visability)
+                var visability = String(currentWeather!.visibility / 1000)
+                if visability == "10" {
+                    visability = "более \(visability)"
                 }
+                view.visabilityLabel.text = "\(visability) км"
                 view.windSpeedLabel.text = "\(currentWeather!.wind.speed) м/с"
                 let pressure = Double(currentWeather!.main.pressure) / 1.333
                 view.pressureLabel.text = "\(Int(pressure)) мм рт. ст."
                 view.humidityLabel.text = "\(currentWeather!.main.humidity) %"
                 view.cloudyLabel.text = "\(currentWeather!.clouds.all) %"
-                view.temperatureLabel.text = "\(currentWeather!.main.temp) C°"
+                view.temperatureLabel.text = "\(currentWeather!.main.temp)°"
                 view.cityLabel.text = currentWeather!.name
                 view.descriptionLabel.text = currentWeather!.weather.first?.description
-                view.maxMinTemperatureLabel.text = "макс: \(currentWeather!.main.temp_max) C°, " + "мин: \(currentWeather!.main.temp_min) C°"
+                view.maxMinTemperatureLabel.text = "макс: \(currentWeather!.main.temp_max)°, " + "мин: \(currentWeather!.main.temp_min)°"
+                let sunsetTime = unixTimeConvertion(unixTime: currentWeather!.sys.sunset)
+                view.sunsetLabel.text = sunsetTime
+                let sunriseTime = unixTimeConvertion(unixTime: currentWeather!.sys.sunrise)
+                view.sunriseLabel.text = sunriseTime
             }
             requestIsBeasy = false
-//            view.activityIndicator.stopAnimating()
+            view.activityIndicator.stopAnimating()
         }
     }
     
@@ -131,6 +146,20 @@ class WeatherViewPresenter{
             } else {
                 return "bad data"
             }
+    }
+    
+    func unixTimeConvertion(unixTime: Int) -> String {
+        let time = NSDate(timeIntervalSince1970: TimeInterval(unixTime))
+        let dateFormatter = DateFormatter()
+        //dateFormatter.timeZone = NSTimeZone(name: timeZoneInfo)
+        dateFormatter.locale = NSLocale(localeIdentifier: NSLocale.system.identifier) as Locale?
+        dateFormatter.dateFormat = "hh:mm a"
+        let dateAsString = dateFormatter.string(from: time as Date)
+        dateFormatter.dateFormat = "h:mm a"
+        let date = dateFormatter.date(from: dateAsString)
+        dateFormatter.dateFormat = "HH:mm"
+        let date24 = dateFormatter.string(from: date!)
+        return date24
     }
     
 }

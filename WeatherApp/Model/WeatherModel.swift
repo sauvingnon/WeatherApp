@@ -130,7 +130,11 @@ struct CurrentWeatherStruct: Codable {
         let lon: Double
         let lat: Double
     }
-    
+    let sys: Sys
+    struct Sys: Codable{
+        let sunrise: Int
+        let sunset: Int
+    }
     let weather: [Weather]
     struct Weather: Codable{
         let id: Int
