@@ -19,6 +19,15 @@ class CitiesViewPresenter{
     }
     var view: CitiesView
     
+    var selectedCity: String{
+        get{
+            return UserDefaults.standard.string(forKey: "SelectedCity") ?? "Москва"
+        }
+        set{
+            UserDefaults.standard.set(newValue, forKey: "SelectedCity")
+        }
+    }
+    
     init(view: CitiesView){
         self.view = view
     }
@@ -27,6 +36,11 @@ class CitiesViewPresenter{
         if(input.isEmpty) { return }
         arrayOfCities.append(input)
         view.searchBar.text = ""
+        view.citiesTableView.reloadData()
+    }
+    
+    func selectCityTapped(cityName: String){
+        selectedCity = cityName
         view.citiesTableView.reloadData()
     }
     

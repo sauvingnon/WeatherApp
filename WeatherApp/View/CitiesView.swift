@@ -57,7 +57,8 @@ extension CitiesView: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CityCell", for: indexPath) as! CityCell
-        cell.setupCell(cityName: presenter.arrayOfCities[indexPath.item])
+        let city = presenter.arrayOfCities[indexPath.item]
+        cell.setupCell(cityName: city, isSelected: presenter.selectedCity == city, presenter: presenter)
         return cell
     }
     

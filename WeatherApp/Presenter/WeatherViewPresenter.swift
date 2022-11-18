@@ -17,6 +17,15 @@ class WeatherViewPresenter{
     weak var view: WeatherView!
     var model: WeatherModel!
     
+    var selectedCity: String{
+        get{
+            return UserDefaults.standard.string(forKey: "SelectedCity") ?? "Москва"
+        }
+        set{
+            UserDefaults.standard.set(newValue, forKey: "SelectedCity")
+        }
+    }
+    
     init(view: WeatherView){
         self.view = view
     }

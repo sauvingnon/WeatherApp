@@ -28,7 +28,12 @@ class WeatherView: UIViewController {
     @IBOutlet weak var visabilityLabel: UILabel!
     @IBOutlet weak var dailyCollectionView: UICollectionView!
     
-    // MARK: - LifeCycle
+    // MARK: - Actions
+    @IBAction func buttonOptionsTapped(_ sender: Any) {
+        actionLeftSwipeGesture()
+    }
+    
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -40,19 +45,16 @@ class WeatherView: UIViewController {
         dailyCollectionView.delegate = self
         dailyCollectionView.dataSource = self
         
-        let leftGesture = UISwipeGestureRecognizer(target: self, action: #selector(WeatherView.actionLeftSwipeGesture(_:)))
-        leftGesture.direction = .left
-        self.view.addGestureRecognizer(leftGesture)
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        presenter.getAllDataForCity(input: "Ижевск")
+        presenter.getAllDataForCity(input: presenter.selectedCity)
         // Стартовый запрос
     }
     
-    @objc func actionLeftSwipeGesture(_ sender: UISwipeGestureRecognizer) {
+    func actionLeftSwipeGesture() {
         if let newViewController = storyboard?.instantiateViewController(withIdentifier: "CityViewId") as? CitiesView {
             newViewController.weatherView = self
             newViewController.modalTransitionStyle = .flipHorizontal // это значение можно менять для разных видов анимации появления
