@@ -94,6 +94,8 @@ class WeatherViewPresenter{
                 view.sunsetLabel.text = sunsetTime
                 let sunriseTime = unixTimeConvertion(unixTime: currentWeather!.sys.sunrise)
                 view.sunriseLabel.text = sunriseTime
+                view.windGustLabel.text = "\(currentWeather!.wind.gust!) м/с"
+                view.windDirectionLabel.text = getDirectionWindFromDegree(degree: currentWeather!.wind.deg)
             }
             requestIsBeasy = false
             view.activityIndicator.stopAnimating()
@@ -135,6 +137,34 @@ class WeatherViewPresenter{
     }
     
     // MARK: - Methods
+    private func getDirectionWindFromDegree(degree: Int)->String{
+        if(degree <= 22 || degree >= 337){
+            return "Север"
+        }
+        if(degree >= 22 && degree < 67){
+            return "СВ"
+        }
+        if(degree >= 67 && degree < 112){
+            return "Восток"
+        }
+        if(degree >= 112 && degree < 157){
+            return "ЮВ"
+        }
+        if(degree >= 157 && degree < 202){
+            return "Юг"
+        }
+        if(degree >= 202 && degree < 247){
+            return "ЮЗ"
+        }
+        if(degree >= 247 && degree < 292){
+            return "Запад"
+        }
+        if(degree >= 292 && degree < 337){
+            return "СЗ"
+        }
+        return "--"
+    }
+    
     private func getDayOfWeek(fullStringDay: String) -> (String){
         let weekdays = [
                     "bad data",

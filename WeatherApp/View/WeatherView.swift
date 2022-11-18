@@ -18,6 +18,7 @@ class WeatherView: UIViewController {
     @IBOutlet weak var temperatureLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var maxMinTemperatureLabel: UILabel!
+    @IBOutlet weak var windGustLabel: UILabel!
     @IBOutlet weak var sunriseLabel: UILabel!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var windSpeedLabel: UILabel!
@@ -27,6 +28,7 @@ class WeatherView: UIViewController {
     @IBOutlet weak var pressureLabel: UILabel!
     @IBOutlet weak var visabilityLabel: UILabel!
     @IBOutlet weak var dailyCollectionView: UICollectionView!
+    @IBOutlet weak var windDirectionLabel: UILabel!
     
     // MARK: - Actions
     @IBAction func buttonOptionsTapped(_ sender: Any) {
