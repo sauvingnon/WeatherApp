@@ -13,6 +13,7 @@ class CitiesView: UIViewController {
     
     var weatherView: WeatherView!
     
+    @IBOutlet weak var weatherDescription: UILabel!
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var citiesTableView: UITableView!
     
@@ -28,13 +29,17 @@ class CitiesView: UIViewController {
         citiesTableView.delegate = self
         searchBar.delegate = self
         
-        let rightGesture = UISwipeGestureRecognizer(target: self, action: #selector(CitiesView.actionRightSwipeGesture(_:)))
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(CitiesView.closeThisView(_:)))
+        tapGesture.numberOfTapsRequired = 1
+        weatherDescription.addGestureRecognizer(tapGesture)
+        
+        let rightGesture = UISwipeGestureRecognizer(target: self, action: #selector(CitiesView.closeThisView(_:)))
         rightGesture.direction = .right
         self.view.addGestureRecognizer(rightGesture)
         // Do any additional setup after loading the view.
     }
     
-    @objc func actionRightSwipeGesture(_ sender: UISwipeGestureRecognizer) {
+    @objc func closeThisView(_ sender: UISwipeGestureRecognizer) {
         dismiss(animated: true)
     }
     

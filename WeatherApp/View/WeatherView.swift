@@ -59,7 +59,7 @@ class WeatherView: UIViewController {
     func actionLeftSwipeGesture() {
         if let newViewController = storyboard?.instantiateViewController(withIdentifier: "CityViewId") as? CitiesView {
             newViewController.weatherView = self
-            newViewController.modalTransitionStyle = .flipHorizontal // это значение можно менять для разных видов анимации появления
+            newViewController.modalTransitionStyle = .crossDissolve // это значение можно менять для разных видов анимации появления
             newViewController.modalPresentationStyle = .overCurrentContext // это та самая волшебная строка, убрав или закомментировав ее, вы получите появление смахиваемого контроллера
             present(newViewController, animated: true, completion: nil)
            }

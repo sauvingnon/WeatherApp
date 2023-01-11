@@ -46,6 +46,7 @@ class WeatherModel{
     }
     
     func fetchCurrentDataForCity(city: String){
+        // Метод для запроса данных о текущей погоде
         var weather: CurrentWeatherStruct?
         let finalUrlString = "http://api.openweathermap.org/data/2.5/weather?q=\(city)&appid=\(apiKey)\(units)\(lang)"
         let url = URL(string: finalUrlString.encodeUrl)
@@ -82,18 +83,18 @@ struct WeatherDailyCellStruct{
 }
 
 struct HourlyWeatherStruct: Codable {
-    let cod: String
+    let cod: String?
     let cnt: Int
     var list: [List]
     struct List: Codable{
         var main: Main
         struct Main: Codable{
-            let temp: Double
-            let feels_like: Double
-            let temp_min: Double
-            let temp_max: Double
-            let pressure: Int
-            let humidity: Int
+            let temp: Double?
+            let feels_like: Double?
+            let temp_min: Double?
+            let temp_max: Double?
+            let pressure: Int?
+            let humidity: Int?
             let sea_level: Int?
             let grnd_level: Int?
         }
@@ -106,8 +107,8 @@ struct HourlyWeatherStruct: Codable {
         }
         var wind: Wind
         struct Wind: Codable{
-            let speed: Double
-            let deg: Int
+            let speed: Double?
+            let deg: Int?
             let gust: Double?
         }
         var dt_txt: String
@@ -115,11 +116,11 @@ struct HourlyWeatherStruct: Codable {
     
     let city: City
     struct City: Codable{
-        let name: String
+        let name: String?
         let coord: Coord
         struct Coord: Codable {
-            let lon: Double
-            let lat: Double
+            let lon: Double?
+            let lat: Double?
         }
     }
 }
@@ -127,43 +128,43 @@ struct HourlyWeatherStruct: Codable {
 struct CurrentWeatherStruct: Codable {
     let coord: Coord
     struct Coord: Codable {
-        let lon: Double
-        let lat: Double
+        let lon: Double?
+        let lat: Double?
     }
     let sys: Sys
     struct Sys: Codable{
-        let sunrise: Int
-        let sunset: Int
+        let sunrise: Int?
+        let sunset: Int?
     }
     let weather: [Weather]
     struct Weather: Codable{
         let id: Int
-        let main: String
-        let description: String
-        let icon: String
+        let main: String?
+        let description: String?
+        let icon: String?
     }
     let base: String
     let main: Main
     struct Main: Codable{
-        let temp: Double
-        let feels_like: Double
-        let temp_min: Double
-        let temp_max: Double
-        let pressure: Int
-        let humidity: Int
+        let temp: Double?
+        let feels_like: Double?
+        let temp_min: Double?
+        let temp_max: Double?
+        let pressure: Int?
+        let humidity: Int?
         let sea_level: Int?
         let grnd_level: Int?
     }
-    let visibility: Int
+    let visibility: Int?
     let wind: Wind
     struct Wind: Codable{
-        let speed: Double
-        let deg: Int
+        let speed: Double?
+        let deg: Int?
         let gust: Double?
     }
     let clouds: Clouds
     struct Clouds: Codable{
-        let all: Int
+        let all: Int?
     }
-    let name: String
+    let name: String?
 }

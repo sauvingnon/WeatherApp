@@ -56,13 +56,14 @@ class WeatherViewPresenter{
     }
     
     func UpdateHourlyWeather(){
+        // Метод для отображения на экране свежих данных о погоде(почасовой)
         if(hourlyWeathers == nil) {
             debugPrint("hourly weather is nil!")
             return
         }
         hourlyWeatherCells.removeAll()
         for item in (hourlyWeathers?.list)!{
-            let temp = Int(item.main.temp)
+            let temp = Int(item.main.temp ?? 0)
             let time = (item.dt_txt.components(separatedBy: " ").last?.components(separatedBy: ":").first)! + ":00"
             hourlyWeatherCells.append(WeatherHourlyCellStruct(temp: temp, image: item.weather.first!.icon, time: time))
         }
@@ -72,30 +73,31 @@ class WeatherViewPresenter{
     }
     
     func UpdateCurrentWeather(){
+        // Метод для отображения на экране свежих данных о погоде(текущей)
         DispatchQueue.main.async { [self] in
             if(currentWeather == nil){
                 debugPrint("current weather is nil!")
             }else{
-                var visability = String(currentWeather!.visibility / 1000)
+                var visability = String((currentWeather!.visibility ?? 0) / 1000)
                 if visability == "10" {
                     visability = "более \(visability)"
                 }
                 view.visabilityLabel.text = "\(visability) км"
-                view.windSpeedLabel.text = "\(currentWeather!.wind.speed) м/с"
-                let pressure = Double(currentWeather!.main.pressure) / 1.333
+                view.windSpeedLabel.text = "\(currentWeather!.wind.speed ?? 0) м/с"
+                let pressure = Double(currentWeather!.main.pressure ?? 0) / 1.333
                 view.pressureLabel.text = "\(Int(pressure)) мм рт. ст."
-                view.humidityLabel.text = "\(currentWeather!.main.humidity) %"
-                view.cloudyLabel.text = "\(currentWeather!.clouds.all) %"
-                view.temperatureLabel.text = "\(currentWeather!.main.temp)°"
+                view.humidityLabel.text = "\(currentWeather!.main.humidity ?? 0) %"
+                view.cloudyLabel.text = "\(currentWeather!.clouds.all ?? 0) %"
+                view.temperatureLabel.text = "\(currentWeather!.main.temp ?? 0)°"
                 view.cityLabel.text = currentWeather!.name
                 view.descriptionLabel.text = currentWeather!.weather.first?.description
-                view.maxMinTemperatureLabel.text = "макс: \(currentWeather!.main.temp_max)°, " + "мин: \(currentWeather!.main.temp_min)°"
-                let sunsetTime = unixTimeConvertion(unixTime: currentWeather!.sys.sunset)
+                view.maxMinTemperatureLabel.text = "макс: \(currentWeather!.main.temp_max ?? 0)°, " + "мин: \(currentWeather!.main.temp_min ?? 0)°"
+                let sunsetTime = unixTimeConvertion(unixTime: currentWeather!.sys.sunset ?? 0)
                 view.sunsetLabel.text = sunsetTime
-                let sunriseTime = unixTimeConvertion(unixTime: currentWeather!.sys.sunrise)
+                let sunriseTime = unixTimeConvertion(unixTime: currentWeather!.sys.sunrise ?? 0)
                 view.sunriseLabel.text = sunriseTime
                 view.windGustLabel.text = "\(currentWeather!.wind.gust!) м/с"
-                view.windDirectionLabel.text = getDirectionWindFromDegree(degree: currentWeather!.wind.deg)
+                view.windDirectionLabel.text = getDirectionWindFromDegree(degree: currentWeather!.wind.deg ?? 0)
             }
             requestIsBeasy = false
             view.activityIndicator.stopAnimating()
@@ -103,6 +105,7 @@ class WeatherViewPresenter{
     }
     
     func UpdateDailyWeather(){
+        // Метод для отображения на экране свежих данных о погоде(недельной)
         if(hourlyWeathers == nil) { return }
         dailyWeatherCells.removeAll()
         var oldWeatherIndex: Int
@@ -122,12 +125,12 @@ class WeatherViewPresenter{
                     }
                     return false
                 })!
-                dailyWeatherCells[oldWeatherIndex].tempMax = max(dailyWeatherCells[oldWeatherIndex].tempMax, Int(item.main.temp_max))
-                dailyWeatherCells[oldWeatherIndex].tempMin = min(dailyWeatherCells[oldWeatherIndex].tempMin, Int(item.main.temp_min))
+                dailyWeatherCells[oldWeatherIndex].tempMax = max(dailyWeatherCells[oldWeatherIndex].tempMax, Int(item.main.temp_max ?? 0))
+                dailyWeatherCells[oldWeatherIndex].tempMin = min(dailyWeatherCells[oldWeatherIndex].tempMin, Int(item.main.temp_min ?? 0))
             }
             else{
                 // Такого дня недели не существует - добавим его
-                let newWeather = WeatherDailyCellStruct(tempMax: Int(item.main.temp_max), tempMin: Int(item.main.temp_min), image: item.weather.first!.icon, day: dayOfWeek)
+                let newWeather = WeatherDailyCellStruct(tempMax: Int(item.main.temp_max ?? 0), tempMin: Int(item.main.temp_min ?? 0), image: item.weather.first!.icon, day: dayOfWeek)
                 dailyWeatherCells.append(newWeather)
             }
         }
@@ -138,6 +141,7 @@ class WeatherViewPresenter{
     
     // MARK: - Methods
     private func getDirectionWindFromDegree(degree: Int)->String{
+        // Метод, преобразующий градус направления ветра в его конкретное название
         if(degree <= 22 || degree >= 337){
             return "Север"
         }
@@ -166,6 +170,7 @@ class WeatherViewPresenter{
     }
     
     private func getDayOfWeek(fullStringDay: String) -> (String){
+        // Метод, преобразующий набор цифр с сервера в названия дней недели
         let weekdays = [
                     "bad data",
                     "Воскресенье",
@@ -188,6 +193,7 @@ class WeatherViewPresenter{
     }
     
     func unixTimeConvertion(unixTime: Int) -> String {
+        // Метод, преобразующий unix-время в нормализованное
         let time = NSDate(timeIntervalSince1970: TimeInterval(unixTime))
         let dateFormatter = DateFormatter()
         //dateFormatter.timeZone = NSTimeZone(name: timeZoneInfo)
