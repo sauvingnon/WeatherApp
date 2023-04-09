@@ -13,7 +13,7 @@ class WeatherViewPresenter{
     var hourlyWeathers: HourlyWeatherStruct?
     var hourlyWeatherCells = [WeatherHourlyCellStruct]()
     var dailyWeatherCells = [WeatherDailyCellStruct]()
-    var requestIsBeasy = false
+    var requestIsBusy = false
     weak var view: WeatherView!
     var model: WeatherModel!
     
@@ -32,7 +32,7 @@ class WeatherViewPresenter{
     
     func getAllDataForCity(input: String?){
         // Метод для запроса всех данных о температуре в городе - почасовой прогноз и текущую погоду
-        if(input == nil || requestIsBeasy) { return }
+        if(input == nil || requestIsBusy) { return }
         if(input!.isEmpty) { return }
         if CheckInternetConnection.currentReachabilityStatus() == .notReachable {
             view.showAlert(title: "Ошибка!", message: "Отсутствует подключение к интернету!")
@@ -40,7 +40,7 @@ class WeatherViewPresenter{
             return
         }
         view.activityIndicator.startAnimating()
-        requestIsBeasy = true
+        requestIsBusy = true
         let text = input?.trimmingCharacters(in: CharacterSet(charactersIn: " "))
         //view.searchBar.text = text
         let queue = DispatchQueue(label: "networkRequest")
@@ -48,9 +48,9 @@ class WeatherViewPresenter{
             self.model.fetchHourlyDataForCity(city: text!)
             self.model.fetchCurrentDataForCity(city: text!)
             Thread.sleep(forTimeInterval: 5)
-            if self.requestIsBeasy {
+            if self.requestIsBusy {
                 self.view.showAlert(title: "Ошибка!", message: "Что-то пошло не так..")
-                self.requestIsBeasy = false
+                self.requestIsBusy = false
             }
         }
     }
@@ -99,7 +99,7 @@ class WeatherViewPresenter{
                 view.windGustLabel.text = "\(currentWeather!.wind.gust!) м/с"
                 view.windDirectionLabel.text = getDirectionWindFromDegree(degree: currentWeather!.wind.deg ?? 0)
             }
-            requestIsBeasy = false
+            requestIsBusy = false
             view.activityIndicator.stopAnimating()
         }
     }
